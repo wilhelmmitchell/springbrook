@@ -1,0 +1,9 @@
+﻿.shadow-no-offset {
+    box-shadow: 0 0rem 1rem rgba(0,0,0,.15);
+}
+.max-repeater-width {
+    max-width: 576px
+}
+.clickable {
+    cursor:pointer
+}

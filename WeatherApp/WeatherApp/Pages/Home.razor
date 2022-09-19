@@ -1,0 +1,38 @@
+﻿@page "/"
+
+<h1 class="w-100 text-center p-4 bg-light">Current Forecast</h1>
+
+<!-- 
+    using a single "zone" input for now and refreshing forecast upon user entry. 
+    this could be modified to use cascading dropdowns consisting of states and zones 
+    or refactored to except a zipcode instead of a zone.
+-->
+
+<div class="input-group mb-3 max-repeater-width w-100 mx-auto">
+    <span class="input-group-text">Zone</span>
+    <input type="text" class="form-control text-center" @onchange="@OnChange_Zone">
+    <span class="input-group-text clickable" title="Refresh" @onclick="OnClick_Refresh">&orarr;</span>
+</div>
+
+@if (string.IsNullOrWhiteSpace(CurrentZoneCode))
+{
+    <div class="text-center mt-3">Please enter a zone.</div>
+}
+else if (!Forecasts.Any())
+{
+    <div class="text-center w-100 mt-3 fw-bold">( @CurrentZoneName )</div>
+    <div class="text-center mt-3">No results found for this zone.</div>
+}
+else
+{
+    <div class="text-center w-100 mt-3 fw-bold">( @CurrentZoneName )</div>
+
+    @foreach (var forecast in Forecasts)
+    {
+        <WeatherApp.Components.ForecastComponent Forecast="forecast"></WeatherApp.Components.ForecastComponent>
+    }
+}
+
+
+
+
