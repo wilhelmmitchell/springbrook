@@ -7,6 +7,6 @@ namespace WeatherApp.Data.Contracts
 {
     public interface IZoneService
     {
-        Task<Zone?> GetZone(string zonecode);
+        Task<Zone> GetZone(string zonecode);
     }
 }

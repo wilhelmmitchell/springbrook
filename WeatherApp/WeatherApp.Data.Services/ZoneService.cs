@@ -19,9 +19,9 @@ namespace WeatherApp.Data.Services
             _httpClient = httpClient;
         }
 
-        public async Task<Zone?> GetZone(string zonecode) 
+        public async Task<Zone> GetZone(string zonecode)
         {
-            Zone? retval = null;
+            Zone retval = null;
 
             try
             {
@@ -31,14 +31,14 @@ namespace WeatherApp.Data.Services
                 //manually pluck name of zone from json response
                 var zoneResponse = JsonNode.Parse(jsonStream);
                 JsonArray features = zoneResponse!["features"]!.AsArray();
-                if (features.Any()) 
+                if (features.Any())
                 {
                     string zoneName = features.FirstOrDefault()!["properties"]!["name"]!.GetValue<string>();
                     retval = new Zone { Name = zoneName };
                 }
             }
             catch (HttpRequestException ex)
-            { 
+            {
                 //app will receive 400 bad request if user types in an invalid zone
             }
 
